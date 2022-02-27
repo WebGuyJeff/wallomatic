@@ -1,0 +1,251 @@
+.wallOMatic {
+    width: 100%;
+    max-width: 12em;
+    margin: 1em auto;
+}
+
+    .wallOMatic_decotop {
+        position: relative;
+        left: calc(50% - 33.3%);
+        box-sizing: initial;
+        border-top: solid 0.4em #0000;
+        border-bottom: solid 0.4em #0000;
+        border-radius: 1em 1em 0 0;
+        padding-top: 3.33%;
+        width: 66.6%;
+        height: 0;
+    }
+
+    .wallOMatic_case {
+        gap: 12% 10%;
+        display: grid;
+        grid: 2fr 2fr 3fr / repeat(3, 1fr);
+        grid-template-areas:
+            " header header header "
+            " gauge1 gauge2 gauge3 "
+            " panel  panel  panel  ";
+        place-items: center center;
+        filter: drop-shadow(-0em 0.4em 0.25em #000);
+        box-shadow: inset 0em 0.15em 0.1em 0 #fffb,
+                    inset -0.2em 0.2em 0.3em 0 #fff9,
+                    inset 0.2em -0.2em 0.3em 0 #0008,
+                    inset 0em -0.1em 0.1em 0 #0008;
+        border-radius: 1.2em;
+        background-color: #3a5524;
+        padding: 8%;
+        padding-bottom: 27%;
+        width: 100%;
+    }
+
+    /* Grid Assignment */
+    .wallOMatic_header { grid-area: header; }
+    .wallOMatic_panel { grid-area: panel; }
+
+    .wallOMatic_header {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        box-shadow: inset -0.1em 0.2em 0.4em 0.1em #000e,
+                       -0.15em 0.15em 0.15em 0 #fff8,
+                     0.15em -0.15em 0.15em 0 #0008;
+        border-radius: .6em;
+        background: #E7E7BE;
+        padding-bottom: 26%;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .wallOMatic_bulb {
+        position: absolute;
+        top: 0em;
+        animation: glow 4s linear 2s infinite;
+        box-shadow: 0.3em 0.3em 4em 4em #FFD50077;
+        border-radius: 0 0 0.1em 0.1em;
+        background: #fff;
+        width: 1em;
+        height: 0.2em;
+    }
+
+    @keyframes glow {
+        0%   { box-shadow: 0.3em 0.3em 2em 4em #FFD50077; }
+        33%  { box-shadow: 0.3em 0.3em 4em 4em #FFD50077; }
+        34%  { box-shadow: 0.3em 0.3em 0em 0em #FFD50077; }
+        36%  { box-shadow: 0.3em 0.3em 4em 4em #FFD50077; }
+        66%  { box-shadow: 0.3em 0.3em 4em 4em #FFD50077; }
+        67%  { box-shadow: 0.3em 0.3em 0em 0em #FFD50077; }
+        68%  { box-shadow: 0.3em 0.3em 2em 4em #FFD50099; }
+        75%  { box-shadow: 0.3em 0.3em 4em 4em #FFD50077; }
+        76%  { box-shadow: 0.3em 0.3em 0em 0em #FFD50077; }
+        77%  { box-shadow: 0.3em 0.3em 4em 4em #FFD50077; }
+        100% { box-shadow: 0.3em 0.3em 2em 3em #FFD50077; }
+    }
+
+    .wallOMatic_name {
+        margin: auto;
+        color: #333;
+        font-family: 'Six Caps', sans-serif;
+        font-size: 188%;
+    }
+
+    .wallOMatic_gauge {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset -0.1em 0.2em 0.4em 0.1em #000e,
+                       -0.15em 0.15em 0.15em 0 #fff8,
+                     0.15em -0.15em 0.15em 0 #0008;
+        border-radius: 50%;
+        background: #E7E7BE;
+        padding-bottom: 100%;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+    }
+
+    /* Grid Assignment */
+    .wallOMatic_gauge:nth-child(2) { grid-area: gauge1; }
+    .wallOMatic_gauge:nth-child(3) { grid-area: gauge2; }
+    .wallOMatic_gauge:nth-child(4) { grid-area: gauge3; }
+
+    .wallOMatic_okLabel {
+        margin: 105% auto 0 auto;
+        color: #333;
+        font-family: 'Six Caps', sans-serif;
+        font-size: 120%;
+    }
+
+    .wallOMatic_warnLabel {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        animation: wallOMatic_warn 8s infinite;
+        box-shadow: inset -0.1em 0.2em 0.4em 0.1em #000e;
+        border-radius: 50%;
+        background: red;
+        width: 100%;
+        height: 100%;
+        color: #fff;
+        font-family: 'Six Caps', sans-serif;
+        font-size: 120%;
+}
+
+    @keyframes wallOMatic_warn {
+        0%   { top: -100%; }
+        40%  { top: -100%; }
+        42%  { top:  0;    }
+        58%  { top:  0;    }
+        60%  { top: -100%; }
+        100% { top: -100%; }
+    }
+
+    .wallOMatic_needle {
+        position: absolute;
+        bottom: 0;
+        left: 1.25em;
+        transform: rotatez(-20deg) translatex(-0.4em);
+        border-right: solid 0.1em #0000;
+        border-bottom: solid 1.8em #333;
+        border-left: solid 0.1em #0000;
+        width: 0.1em;
+    }
+
+    .wallOMatic_gauge:nth-child(3) span {animation: wallOMatic_needle 5s infinite; }
+    .wallOMatic_gauge:nth-child(4) span {animation: wallOMatic_needle 8s infinite; }
+
+    @keyframes wallOMatic_needle {
+        0%   {transform: rotatez(-20deg) translatex(-0.4em);}
+        25%  {transform: rotatez(0deg) translatex(0em);}
+        50%  {transform: rotatez(-30deg) translatex(-0.6em);}
+        75%  {transform: rotatez(-20deg) translatex(-0.4em);}
+        85% {transform: rotatez(20deg) translatex(0.4em);}
+        100%   {transform: rotatez(-20deg) translatex(-0.4em);}
+    }
+
+    .wallOMatic_panel {
+        display: grid;
+        grid: 25% 50% 25% / 15% 70% 15%;
+        grid-template-areas:
+            " rivet1 button rivet2 "
+            " .      button .      "
+            " rivet3 button rivet4 ";
+        place-items: center center;
+        margin-top: 0%;
+        box-shadow: inset -0.1em 0.1em 0.05em 0 #fffa,
+                    inset 0.1em -0.1em 0.05em 0 #0008,
+                               0em 0.1em 0.5em 0 #000;
+        border-radius: 0.6em;
+        padding: 3%;
+        width: 98%;
+        height: 100%;
+    }
+
+    .wallOMatic_button {
+        grid-area: button;
+        transition: 0.2s;
+        box-shadow: 0 0 0 0.15em #000d;
+        border: none;
+        border-radius: 50%;
+        background: radial-gradient(at 65% 35%, #fffa 5%, #0000 30%, #0000 50%, #000c 85%),
+                    #810808;
+        padding-bottom: 36%;
+        width: 36%;
+        height: 0;
+    }
+
+    .wallOMatic_button:hover {
+        cursor: pointer;
+    }
+
+    .wallOMatic_button:active {
+        box-shadow: inset 0 0 1em 0.2em #000, 0 0 0.1em 0.15em #000d;
+    }
+
+.rivet {
+    box-shadow: -0.1em 0.1em 0.2em 0 #000d;
+    border-radius: 50%;
+    padding-bottom: 50%;
+    width: 50%;
+    height: 0;
+}
+    /* Grid Assignment */
+    .rivet:nth-child(1) { grid-area: rivet1; }
+    .rivet:nth-child(2) { grid-area: rivet2; }
+    .rivet:nth-child(3) { grid-area: rivet3; }
+    .rivet:nth-child(4) { grid-area: rivet4; }
+
+.jr--bronze {
+    background: radial-gradient(at 75% 28%, #fffc 3%,  #0000 11%),
+                radial-gradient(at 50% 50%, #0000 44%, #0007 99%),
+                radial-gradient(at 67% 33%, #0000 10%, #0006 30%),
+                radial-gradient(at 50% 45%, #0000 60%, #0003 75%),
+                linear-gradient(#0000 1%,   #fff  0%,  #0000 12%),
+                linear-gradient(#0000 14%,  #fff2 18%, #0000 30%),
+                linear-gradient(#0000 8%,   #fff5 15%, #0000 38%),
+                #a16e3f; /* Metal - Bronze */
+}
+
+.jr--bronze-flat {
+    background: linear-gradient(90deg, #0000 18%, #0002 32%, #0000 60%),
+                linear-gradient(90deg, #0000 40%, #fff4 68%, #0000 82%),
+                linear-gradient(170deg,#0000 36%, #fff6 37%,  #0000 38%, #0000 45%, #fff5 46%, #0000 60%),
+                radial-gradient(at 50% 50%, #0000 60%, #0008 100%),
+                linear-gradient(170deg, #0000 75%, #0003 78%, #0000 82%),
+                linear-gradient(#0000 0%,  #0003 50%, #0000 100%),
+                linear-gradient(#0000 0%,   #0003 15%, #0000 38%),
+                #a16e3f; /* Metal - Flat Bronze */
+}
+
+
+@font-face { /* latin */
+  font-family: 'Six Caps';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sixcaps/v11/6ae_4KGrU7VR7bNmaYcV_3Q.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
