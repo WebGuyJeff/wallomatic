@@ -1,12 +1,13 @@
-/*
- * Wall-O-Matic
+/**
+ * Wall-O-Matic - Generator Script
  *
- * A plugin to generate css wallpaper on page load or manual initiation.
+ * This script calculates and builds the child elements before inserting into DOM.
  *
- * Author: Jefferson Real
- * URL: https://jeffersonreal.com
- * Copyright: © 2021 Jefferson Real
- *
+ * @package wallomatic
+ * @author Jefferson Real <me@jeffersonreal.com>
+ * @copyright Copyright (c) 2021, Jefferson Real
+ * @license GPL2+
+ * @link https://jeffersonreal.com
  */
 
 let wallOMatic_plugin = function() {

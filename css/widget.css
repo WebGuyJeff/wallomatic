@@ -1,3 +1,13 @@
+/**
+ * Wall-O-Matic - Widget Styles
+ *
+ * @package wallomatic
+ * @author Jefferson Real <me@jeffersonreal.com>
+ * @copyright Copyright (c) 2021, Jefferson Real
+ * @license GPL2+
+ * @link https://jeffersonreal.com
+ */
+
 .wallOMatic {
     width: 100%;
     max-width: 12em;

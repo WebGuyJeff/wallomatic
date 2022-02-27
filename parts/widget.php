@@ -1,11 +1,20 @@
 <?php
+/**
+ * Wall-O-Matic - Widget
+ *
+ * @package wallomatic
+ * @author Jefferson Real <me@jeffersonreal.com>
+ * @copyright Copyright (c) 2021, Jefferson Real
+ * @license GPL2+
+ * @link https://jeffersonreal.com
+ */
 
 
-class wallomatic_widget extends WP_Widget {
+class Wallomatic_Widget extends WP_Widget {
 
 
     /**
-     * Construct the wallOMatic widget.
+     * Construct the widget.
      */
     function __construct() {
 
@@ -19,7 +28,7 @@ class wallomatic_widget extends WP_Widget {
 
 
     /**
-     * output wallOMatic widget settings form.
+     * output widget settings form.
      */
     function form( $instance ) {
 
@@ -35,12 +44,12 @@ class wallomatic_widget extends WP_Widget {
 
 
     /**
-     * display the wallOMatic widget on the front end.
+     * display the widget on the front end.
      */
     function widget( $args, $instance ) {
 
         // enqueue the styles
-        wp_enqueue_style('wallomatic_widget.css');
+        wp_enqueue_style('wallomatic_widget_css');
 
         //Check if a colour has been set in admin settings
         $casecolour = $instance['casecolour'];
@@ -84,7 +93,7 @@ class wallomatic_widget extends WP_Widget {
 
 
     /**
-     * define the data saved by the wallOMatic widget.
+     * define the data saved by the widget.
      */
     function update( $new_instance, $old_instance ) {
         $instance = $old_instance;
@@ -92,10 +101,10 @@ class wallomatic_widget extends WP_Widget {
         return $instance;
     }
 
-} // Class wallomatic_widget end
+} // Class Wallomatic_Widget end
 
 /**
- * Register and load the wallOMatic widget.
+ * Register and load the widget.
  */
 function wallomatic_load_widget() {
     register_widget( 'wallomatic_widget' );
