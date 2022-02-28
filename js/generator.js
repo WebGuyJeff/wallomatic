@@ -1,5 +1,5 @@
 /**
- * Wall-O-Matic - Generator Script
+ * Wallomatic - Generator Script
  *
  * This script calculates and builds the child elements before inserting into DOM.
  *

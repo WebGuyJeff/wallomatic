@@ -1,2 +1,2 @@
-# wall-o-matic
+# wallomatic
 A CSS wallpaper generating module

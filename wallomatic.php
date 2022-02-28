@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Wall-O-Matic
+ * Plugin Name: Wallomatic
  * Plugin URI: https://jeffersonreal.com
  * Description: wallOMatic randomly generates wallpaper on load.
  * Version: 0.2

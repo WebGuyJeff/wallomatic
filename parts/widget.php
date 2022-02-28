@@ -1,6 +1,6 @@
 <?php
 /**
- * Wall-O-Matic - Widget
+ * Wallomatic - Widget
  *
  * @package wallomatic
  * @author Jefferson Real <me@jeffersonreal.com>
