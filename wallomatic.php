@@ -20,7 +20,7 @@
  * Register the scripts and styles
  */
 function wallomatic_scripts_and_styles() {
-    wp_register_script( 'wallomatic_generator_js', plugins_url ( 'js/generator.js', __FILE__ ), array( 'jquery' ), '0.5', true );
+    wp_register_script( 'wallomatic_generator_js', plugins_url ( 'js/generator.js', __FILE__ ), array(), '0.5', true );
     wp_register_style( 'wallomatic_wallpaper_css', plugins_url ( 'css/wallpaper.css', __FILE__ ), array(), '0.5', 'all' );
     wp_register_style( 'wallomatic_widget_css', plugins_url ( 'css/widget.css', __FILE__ ), array(), '0.5', 'all' );
 }
