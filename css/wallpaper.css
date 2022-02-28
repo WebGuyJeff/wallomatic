@@ -16,7 +16,7 @@
 body {
     position: relative;
 }
-    .wallOMatic_wall {
+    .wallomatic_wall {
         /* these are inlined
         position: fixed;
         top: -10em;
@@ -27,10 +27,10 @@ body {
         width: 100%;
         overflow: hidden;
     }
-        .wallOMatic_cell {
+        .wallomatic_cell {
             position: absolute;
         }
-            .wallOMatic_overlay {
+            .wallomatic_overlay {
                 position: absolute;
                 z-index: 1;
                 width: 100%;

@@ -10,100 +10,131 @@
  * @link https://jeffersonreal.com
  */
 
-let wallOMatic_plugin = function() {
+( function wallomatic_plugin() {
+"use strict";
 
-    let wallOMatic = function() {
-    "use strict";
-        /* Config Values */
-        const columns = Math.floor((Math.random() * (16 - 6 + 1)) + 6);
-        const cellAspect = 0.50;
-        const radius = (Math.floor((Math.random() * 20) + 1 + 1)) / 10;
-        const skewX = Math.floor((Math.random() * (40 - 10 + 1)) + 10);
-        const skewY = Math.floor((Math.random() * (40 - 10 + 1)) + 10);
-        const colours = ["#fd6a42", "#b1e8f2", "#ffb908", "#fff"];
+	const wall = document.createElement( 'div' );
+	wall.setAttribute('class', 'wallomatic_wall');
+	wall.setAttribute('style', 'position: fixed; top: -10em; height: calc(100% + 20em);');
+	wall.innerHTML = '<div class="wallomatic_overlay"></div>';
 
-        const cellWidth = parseFloat(100 / columns).toFixed(2);
-        let cellHeight = parseFloat(($('.wallOMatic_wall').width() / columns) * cellAspect).toFixed(2);
-        let rowCurrent = 0;
-        let right = 0;
-        let bottom = 0;
-        let rowColours = [];
-        let resizeTimer = null;
+	let generate = function() {
 
-        $("head").append("<style>.wallOMatic_cell{width:" + cellWidth + "%;height:" + cellHeight + "px;border-radius:" + radius + "rem;transform:skew(" + skewY + "deg," + skewX + "deg)}.wallOMatic_cell:nth-child(odd){transform:skew(-" + skewY + "deg,-" + skewX + "deg);}</style>");
+		/**
+		 * Plugin settings.
+		 * 
+		 * These will eventually be exposed to the user via UI setting controls.
+		 * 
+		 */
+		const columns		= Math.floor( ( Math.random() * ( 16 - 6 + 1 ) ) + 6 );
+		const cellAspect  = 0.50;
+		const radius	  	= ( Math.floor( ( Math.random() * 20 ) + 1 + 1 ) ) / 10;
+		const skewX	   	= Math.floor( ( Math.random() * ( 40 - 10 + 1 ) ) + 10 );
+		const skewY	   	= Math.floor( ( Math.random() * ( 40 - 10 + 1 ) ) + 10 );
+		const colours	 	= [ "#fd6a42", "#b1e8f2", "#ffb908", "#fff" ];
 
-        wallOMatic_grid();
-        function wallOMatic_grid() {
-            let containerHeight = $('.wallOMatic_wall').height();
-            let rowQty = Math.ceil(containerHeight / cellHeight);
-            if (rowQty > rowCurrent) {
-                let rowDeficit = rowQty - rowCurrent;
-                    if (rowDeficit > 250) { /* Deficit error threshold */
-                        console.log("WallOMatic [Error] Deficit threshold exceeded, aborting.");
-                        return;
-                    }
-                    for (let i = 0; i < rowDeficit; i++) {
-                        right = 0;
-                        wallOMatic_colours(rowColours);
-                        for (let i = 0; i < columns; i++) {
-                            $(".wallOMatic_wall").append("<div class=\"wallOMatic_cell\" style=\"right:" + right + "%;bottom:" + bottom + "px;background: " + rowColours[i] + ";\"></div>");
-                            right = parseFloat(((+right) + (+cellWidth)).toFixed(1));
-                        }
-                        bottom = parseFloat(((+bottom) + (+cellHeight)).toFixed(1));
-                    }
-                    rowCurrent = rowCurrent + rowDeficit;
-                    //console.log("WallOMatic [Notice] Built " + rowDeficit + " rows. Current grid " + columns + " x " + rowCurrent + ", " + (columns * rowCurrent) + " cells.");
-            }
-        }
+		const cellWidth = parseFloat( 100 / columns ).toFixed( 2 );
+		let cellHeight = parseFloat( ( wall.offsetWidth / columns ) * cellAspect ).toFixed( 2 );
+		let rowCurrent = 0;
+		let right = 0;
+		let bottom = 0;
+		let rowColours = [];
+		let resizeTimer = null;
 
-        function wallOMatic_colours(array) {
-            let colourPool = [];
-            function removeFromPool(a) {
-                let r = colourPool.indexOf(a);
-                colourPool.splice(r, 1);
-                return;
-            }
-            for (let n = 0; n < (columns); n++) {
-                colourPool = Array.from(colours);
-                if (colourPool.indexOf(array[n]) !== -1 ) {
-                    removeFromPool(array[n]);
-                }
-                if (colourPool.indexOf(array[n - 1]) !== -1) {
-                    removeFromPool(array[n - 1]);
-                }
-                array[n] = colourPool[Math.floor(Math.random() * colourPool.length)];
-            }
-        }
+		const head = document.querySelector( 'head' );
+		head.insertAdjacentHTML( "beforeend", "<style>.wallomatic_cell{width:" + cellWidth + "%;height:" + cellHeight + "px;border-radius:" + radius + "rem;transform:skew(" + skewY + "deg," + skewX + "deg)}.wallomatic_cell:nth-child(odd){transform:skew(-" + skewY + "deg,-" + skewX + "deg);}</style>" );
 
-        $(window).resize(function() {
-            if(resizeTimer !== null) window.clearTimeout(resizeTimer);
-            resizeTimer = window.setTimeout(function() {
-                wallOMatic_grid();
-            }, 500);
-        });
-    };
+		let wallomatic_colours = ( array ) => {
+			let colourPool = [];
+			function removeFromPool( a ) {
+				let r = colourPool.indexOf( a );
+				colourPool.splice( r, 1 );
+				return;
+			}
+			for ( let n = 0; n < ( columns ); n++ ) {
+				colourPool = Array.from( colours );
+				if ( colourPool.indexOf( array[ n ] ) !== -1 ) {
+					removeFromPool( array[ n ] );
+				}
+				if ( colourPool.indexOf( array[ n - 1 ] ) !== -1 ) {
+					removeFromPool( array[ n - 1 ] );
+				}
+				array[ n ] = colourPool[ Math.floor( Math.random() * colourPool.length ) ];
+			}
+		}
 
-    /* Fire wallpaper refresh on manual button click */
-    $(".wallOMatic_button").click(function(){
-        $(".wallOMatic_cell").remove();
-        wallOMatic();
-    });
+		let wallomatic_grid = () => {
+			let containerHeight = wall.offsetHeight;
+			let rowQty = Math.ceil( containerHeight / cellHeight );
+			if ( rowQty > rowCurrent ) {
+				let rowDeficit = rowQty - rowCurrent;
+					if ( rowDeficit > 250 ) { /* Deficit error threshold */
+						console.log( "wallomatic [Error] Deficit threshold exceeded, aborting." );
+						return;
+					}
+					for ( let i = 0; i < rowDeficit; i++ ) {
+						right = 0;
+						wallomatic_colours( rowColours );
+						for ( let i = 0; i < columns; i++ ) {
+							wall.insertAdjacentHTML( "beforeend", "<div class=\"wallomatic_cell\" style=\"right:" + right + "%;bottom:" + bottom + "px;background: " + rowColours[i] + ";\"></div>");
+							right = parseFloat( ( ( +right ) + ( +cellWidth ) ).toFixed( 1 ) );
+						}
+						bottom = parseFloat( ( ( +bottom ) + ( +cellHeight ) ).toFixed( 1 ) );
+					}
+					rowCurrent = rowCurrent + rowDeficit;
+					//console.log("Wallomatic [Notice] Built " + rowDeficit + " rows. Current grid " + columns + " x " + rowCurrent + ", " + (columns * rowCurrent) + " cells.");
+			}
+		};
+		wallomatic_grid();
 
-    // Poll for doc ready state
-    let interval = setInterval(function() {
-        if(document.readyState === 'complete') {
-            clearInterval(interval);
+		const resized = () => {
+			if( resizeTimer !== null ) window.clearTimeout( resizeTimer );
+			resizeTimer = window.setTimeout( () => {
+				wallomatic_grid();
+			}, 100);
+		};
+		window.onresize = resized;
+	};
 
-            /* Add wall to the body element */
-            $(document.body).append('<div class="wallOMatic_wall" style="position: fixed; top: -10em; height: calc(100% + 20em);"><div class="wallOMatic_overlay"></div></div>');
+	
+	/**
+	 * Clean up wall children and build a new grid (new wallpaper pattern).
+	 *
+	 */
+	const dump_cells = () => {
+		return new Promise ( ( resolve ) => {
+			while ( wall.childNodes.length > 1 ) {
+				wall.removeChild( wall.lastChild );
+				if ( wall.childNodes.length === 1 ) resolve( 'no more cells' );
+			}
+		} );
+	};
+	const new_wall = async () => {
+		await dump_cells();
+		generate();
+	};
 
-            /* Start the reactor */
-            if($(".wallOMatic_wall").length){
-                wallOMatic();
-            }
 
-        }
-    }, 100);
+	/**
+	 * If the widget exists, add a listener to the button.
+	 *
+	 */
+	const widget_button = document.querySelector( '.wallomatic_button' );
+	if( widget_button ) widget_button.addEventListener( 'click', new_wall );
 
-};
-wallOMatic_plugin();
+
+	/**
+	 * Poll for doc ready state, then append wall and generate.
+	 *
+	 */
+	let init = setInterval( () => {
+		if( document.readyState === 'complete' ) {
+			clearInterval( init );
+			document.body.appendChild( wall );
+			if( !!document.querySelector( '.wallomatic_wall' ) ){
+				generate();
+			}
+		}
+	}, 100);
+
+})();

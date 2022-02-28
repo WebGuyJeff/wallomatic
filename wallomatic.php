@@ -30,7 +30,7 @@ add_action( 'wp_enqueue_scripts', 'wallomatic_scripts_and_styles' );
 /**
 * Init the widget
 */
-include( plugin_dir_path( __FILE__ ) . 'parts/wallomatic_widget.php');
+include( plugin_dir_path( __FILE__ ) . 'parts/widget.php');
 
 
 function shortcode_wallomatic() {

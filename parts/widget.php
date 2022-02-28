@@ -23,7 +23,7 @@ class Wallomatic_Widget extends WP_Widget {
             'description' => 'An automatic wallpaper generating machine!'
         );
         parent::__construct( 'wallomatic_widget', 'WallOMatic', $widget_options );
-
+        /* second arg is name as it appears in widget picker */
     }
 
 
@@ -36,7 +36,7 @@ class Wallomatic_Widget extends WP_Widget {
 
         ?>
         <p>
-        <label for="<?php echo $this->get_field_id( 'casecolour'); ?>">wallOMatic case colour</label>
+        <label for="<?php echo $this->get_field_id( 'casecolour'); ?>">wallomatic case colour</label>
         <input class="widefat" type="text" id="<?php echo $this->get_field_id( 'casecolour' ); ?>" name="<?php echo $this->get_field_name( 'casecolour' ); ?>" value="<?php echo esc_attr( $casecolour ); ?>" />
         </p>
         <?php
@@ -60,29 +60,29 @@ class Wallomatic_Widget extends WP_Widget {
         echo $args['before_widget'];
         ?>
 
-        <div class="wallOMatic">
-            <div class="wallOMatic_decotop jr--bronze"></div>
-            <div class="wallOMatic_case" <?php echo $inlinecolour; ?> >
-                <div class="wallOMatic_header">
-                      <div class="wallOMatic_bulb"></div>
-                      <span class="wallOMatic_name">Wall-O-Matic</span>
+        <div class="wallomatic">
+            <div class="wallomatic_decotop jr--bronze"></div>
+            <div class="wallomatic_case" <?php echo $inlinecolour; ?> >
+                <div class="wallomatic_header">
+                      <div class="wallomatic_bulb"></div>
+                      <span class="wallomatic_name">Wall-O-Matic</span>
                 </div>
-                <div class="wallOMatic_gauge">
-                    <span class="wallOMatic_okLabel">OK</span>
-                    <span class="wallOMatic_warnLabel">Warn</span>
+                <div class="wallomatic_gauge">
+                    <span class="wallomatic_okLabel">OK</span>
+                    <span class="wallomatic_warnLabel">Warn</span>
                 </div>
-                <div class="wallOMatic_gauge">
-                    <span class="wallOMatic_needle"></span>
+                <div class="wallomatic_gauge">
+                    <span class="wallomatic_needle"></span>
                 </div>
-                <div class="wallOMatic_gauge">
-                    <span class="wallOMatic_needle"></span>
+                <div class="wallomatic_gauge">
+                    <span class="wallomatic_needle"></span>
                 </div>
-                <div class="wallOMatic_panel jr--bronze-flat">
+                <div class="wallomatic_panel jr--bronze-flat">
                     <div class="rivet jr--bronze"></div>
                     <div class="rivet jr--bronze"></div>
                     <div class="rivet jr--bronze"></div>
                     <div class="rivet jr--bronze"></div>
-                    <button class="wallOMatic_button"></button>
+                    <button class="wallomatic_button"></button>
                 </div>
             </div>
         </div>
