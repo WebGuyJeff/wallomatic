@@ -4,10 +4,10 @@
  * This script calculates and builds the child elements before inserting into DOM.
  *
  * @package wallomatic
- * @author Jefferson Real <me@jeffersonreal.com>
+ * @author Jefferson Real <me@jeffersonreal.uk>
  * @copyright Copyright (c) 2021, Jefferson Real
  * @license GPL2+
- * @link https://jeffersonreal.com
+ * @link https://jeffersonreal.uk
  */
 
 ( function wallomatic_plugin() {
